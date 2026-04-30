@@ -41,6 +41,7 @@ This standard does not:
 - Assess model quality, bias, or fairness
 - Define appropriate decision boundaries (that is a domain-specific judgment)
 - Eliminate risk (it makes risk ownership explicit)
+- Replace safety engineering artifacts (FMEA, FTA, HARA, hazard log). The Named Owner of a decision boundary should have access to the hazard analysis for that boundary as part of accepting their designation.
 
 ---
 
@@ -146,6 +147,8 @@ A complete Named Owner entry specifies:
 
 If a Named Owner leaves the organization or the role, the Decision Boundary is immediately in a state of accountability vacancy. An AI system operating on a vacant decision boundary is not cleared. The Specification Owner is responsible for detecting vacancy and triggering reassignment within a defined period (recommended: 5 business days).
 
+A decision boundary with a Named Owner vacant for more than 5 business days is automatically in NOT CLEARED status. Any system operating on a boundary in NOT CLEARED status due to vacancy must be flagged to the Clearance Authority within 24 hours of the vacancy deadline passing.
+
 ---
 
 ### 3.3 Consequence Chain
@@ -186,6 +189,8 @@ A complete Consequence Chain specifies, in order:
 #### 3.3.5 Testability Requirement
 
 The Consequence Chain must be tested before deployment clearance. A consequence chain that has never been exercised cannot be claimed as complete. Testing may be done via tabletop exercise, staging environment simulation, or structured walkthrough with the Named Owner and resolution authority present.
+
+Minimum acceptable test: a structured walkthrough in which the Named Owner, Clearance Authority, and at least one system operator confirm they can execute each step in the chain without reference to documentation they have not previously read. The walkthrough must be documented with participant names and date.
 
 ---
 
@@ -253,6 +258,8 @@ Changes to this standard are proposed via GitHub Issues and require:
 2. A proposed change with specific text
 3. At least two reviewers from organizations who have completed at least one accountability specification
 4. A 30-day community review period before merge
+
+Bootstrap provision (v0.1.x only): For changes to v0.1.x versions, reviewers may be practitioners who have evaluated this standard against a real system — whether or not they have completed a formal accountability specification under this standard. This bootstrap provision expires at v1.0.0.
 
 ---
 
