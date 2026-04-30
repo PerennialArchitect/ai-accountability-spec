@@ -41,7 +41,9 @@ This standard does not:
 - Assess model quality, bias, or fairness
 - Define appropriate decision boundaries (that is a domain-specific judgment)
 - Eliminate risk (it makes risk ownership explicit)
-- Replace safety engineering artifacts (FMEA, FTA, HARA, hazard log). The Named Owner of a decision boundary should have access to the hazard analysis for that boundary as part of accepting their designation.
+- Replace safety engineering artifacts (FMEA, FTA, HARA, hazard log) or formal verification requirements
+
+> **Note:** The Named Owner of a decision boundary should have access to the hazard analysis for that boundary as part of accepting their designation. Accountability without understanding of failure modes is incomplete.
 
 ---
 
