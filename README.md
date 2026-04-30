@@ -3,8 +3,8 @@
 **An engineering artifact — not an ethics checklist — for naming human ownership of AI decision boundaries before deployment.**
 
 [![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
-[![Version](https://img.shields.io/badge/version-v0.1.0-blue)](https://github.com/TechySingh/ai-accountability-spec/releases/tag/v0.1.0)
-[![Built with AI Accountability Spec](https://img.shields.io/badge/Built%20with-AI%20Accountability%20Spec-0a0a0a)](https://github.com/TechySingh/ai-accountability-spec)
+[![Version](https://img.shields.io/badge/version-v0.1.0-blue)](https://github.com/PerennialArchitect/ai-accountability-spec/releases/tag/v0.1.0)
+[![Built with AI Accountability Spec](https://img.shields.io/badge/Built%20with-AI%20Accountability%20Spec-0a0a0a)](https://github.com/PerennialArchitect/ai-accountability-spec)
 
 ---
 
@@ -80,14 +80,18 @@ If any field is incomplete, the system is **not cleared for deployment review**.
 This specification operationalizes principles already encoded in law and policy:
 
 - **EU AI Act (2024):** Assigns liability to deployers of high-risk AI systems. This spec creates the pre-deployment record that demonstrates accountability was assigned — not assumed.
-- **NATO AI Principles:** Require human oversight of AI in defense contexts. The Named Owner field and Consequence Chain together constitute the engineering implementation of "meaningful human control."
+- **NATO AI Principles:** Require human oversight of AI in defense contexts. The Named Owner field and Consequence Chain together provide a concrete engineering implementation of meaningful human control — the kind of artifact that NATO principles call for but do not specify.
 - **NIST AI RMF:** Recommends accountability structures for AI governance. This spec is the artifact that makes those structures concrete and auditable.
+
+Completing this spec does not constitute compliance with any regulation. It creates the pre-deployment record that makes compliance claims defensible — and distinguishes organizations that assigned accountability from organizations that assumed it.
 
 The standard is not a compliance tool. It is what compliance tools should point to.
 
 ---
 
 ## How to Use This Standard
+
+This artifact is completed before any deployment sign-off — regardless of what your organization calls that gate: CDR, production release, go-live approval, or deployment review board. If a system is being reviewed for deployment and no accountability specification exists, the review should not proceed.
 
 ### For a new AI system:
 1. For each decision the system makes without human confirmation, fill in [`templates/accountability-spec.md`](templates/accountability-spec.md)
@@ -118,7 +122,6 @@ ai-accountability-spec/
 │   └── accountability-spec.json       — JSON schema for programmatic use
 ├── examples/
 │   ├── README.md                      — Index of examples
-│   ├── isr-ai-recommendation-system.md — Defense AI example (fictional/illustrative)
 │   ├── enterprise-ai-deployment.md   — Enterprise loan decision AI example
 │   └── manufacturing-ops-ai.md       — Manufacturing production scheduling AI example
 ├── CONTRIBUTING.md                    — How to contribute examples and proposals
@@ -132,10 +135,10 @@ ai-accountability-spec/
 Add this to your project README to signal that your AI system has a completed accountability specification:
 
 ```markdown
-[![Built with AI Accountability Spec](https://img.shields.io/badge/Built%20with-AI%20Accountability%20Spec-0a0a0a)](https://github.com/TechySingh/ai-accountability-spec)
+[![Built with AI Accountability Spec](https://img.shields.io/badge/Built%20with-AI%20Accountability%20Spec-0a0a0a)](https://github.com/PerennialArchitect/ai-accountability-spec)
 ```
 
-[![Built with AI Accountability Spec](https://img.shields.io/badge/Built%20with-AI%20Accountability%20Spec-0a0a0a)](https://github.com/TechySingh/ai-accountability-spec)
+[![Built with AI Accountability Spec](https://img.shields.io/badge/Built%20with-AI%20Accountability%20Spec-0a0a0a)](https://github.com/PerennialArchitect/ai-accountability-spec)
 
 ---
 
@@ -148,7 +151,7 @@ Examples from real deployments (anonymized) and feedback on the standard are wel
 ## Stay Connected
 
 **Human × AI Weekly** — a newsletter on building AI systems that are accountable, not just capable.
-[Subscribe](#) *(link coming)*
+[Subscribe on LinkedIn](https://www.linkedin.com/newsletters/human-%C3%97-ai-weekly-7432859265515819009/)
 
 ---
 
