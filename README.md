@@ -109,6 +109,9 @@ This artifact is completed before any deployment sign-off — regardless of what
 - Version the spec alongside your model versions
 - Use the JSON schema ([`templates/accountability-spec.json`](templates/accountability-spec.json)) to integrate with CI/CD tooling
 
+### For SysML and model-based teams
+The three required fields map naturally to SysML constructs: `«AccountabilityBoundary»` blocks with `«NamedOwner»` and `«ConsequenceChain»` as value properties. A formal SysML profile is planned for v0.2.0. Until then, the JSON schema ([`templates/accountability-spec.json`](templates/accountability-spec.json)) provides a machine-readable representation compatible with model-based toolchains.
+
 ---
 
 ## Repository Structure
