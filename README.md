@@ -8,6 +8,12 @@
 
 ---
 
+Every AI system deployed today has logs. Almost none have a document that names a person, defines a decision boundary, and maps a consequence chain — written before the system acted.
+
+This is that document.
+
+---
+
 ## The Gap That Kills
 
 Boeing's MCAS system had rules, logs, certification, and test data. What it did not have was a named person accountable for the decision boundary that allowed the system to override pilot input without confirmation. When that boundary produced the wrong outcome on two flights, 346 people died. The accountability gap was not discovered after deployment. It was designed in before the system flew.
@@ -18,17 +24,17 @@ This standard closes that gap.
 
 ---
 
-## What This Is
+## The 2AM Test
 
-The AI Accountability Specification Standard is a structured engineering artifact — three required fields per decision boundary — that must be completed before an AI system is cleared for deployment review.
+Your AI system just did something unexpected. It's 2AM. Someone calls.
 
-It is not:
-- An ethics framework
-- A compliance checklist
-- A post-incident review template
-- A substitute for regulation
+Can you answer these in under 10 seconds?
 
-It is a gate. If the fields are empty, the system does not pass the gate.
+- What was the system **authorized** to do?
+- **Who** owns the outcome?
+- What happens **next**?
+
+If any answer is "I'd have to check," you don't have an accountability specification. You have logs.
 
 ---
 
@@ -113,7 +119,8 @@ ai-accountability-spec/
 ├── examples/
 │   ├── README.md                      — Index of examples
 │   ├── isr-ai-recommendation-system.md — Defense AI example (fictional/illustrative)
-│   └── enterprise-ai-deployment.md   — Enterprise loan decision AI example
+│   ├── enterprise-ai-deployment.md   — Enterprise loan decision AI example
+│   └── manufacturing-ops-ai.md       — Manufacturing production scheduling AI example
 ├── CONTRIBUTING.md                    — How to contribute examples and proposals
 └── LICENSE                           — CC BY 4.0
 ```
