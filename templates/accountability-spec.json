@@ -1,0 +1,368 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/TechySingh/ai-accountability-spec/blob/main/templates/accountability-spec.json",
+  "title": "AI Accountability Specification",
+  "description": "Schema for the AI Accountability Specification Standard — an engineering artifact for naming human ownership of AI decision boundaries before deployment. Standard version: v0.1.0.",
+  "type": "object",
+  "required": [
+    "systemName",
+    "systemVersion",
+    "date",
+    "specificationVersion",
+    "specificationOwner",
+    "decisionBoundaries"
+  ],
+  "properties": {
+    "systemName": {
+      "type": "string",
+      "description": "The name of the AI system or component this specification covers.",
+      "minLength": 1
+    },
+    "systemVersion": {
+      "type": "string",
+      "description": "The model version or deployment version this specification applies to.",
+      "minLength": 1
+    },
+    "date": {
+      "type": "string",
+      "format": "date",
+      "description": "Date this specification was created or last updated. ISO 8601 format: YYYY-MM-DD."
+    },
+    "specificationVersion": {
+      "type": "string",
+      "description": "Version of the AI Accountability Specification Standard used to complete this document.",
+      "pattern": "^v\\d+\\.\\d+\\.\\d+$",
+      "examples": ["v0.1.0"]
+    },
+    "specificationOwner": {
+      "type": "object",
+      "description": "The person responsible for the accuracy and currency of this specification document.",
+      "required": ["fullName", "contact"],
+      "properties": {
+        "fullName": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "type": "string"
+        },
+        "contact": {
+          "type": "string",
+          "description": "Direct contact method — not a team inbox.",
+          "minLength": 1
+        }
+      }
+    },
+    "decisionBoundaries": {
+      "type": "array",
+      "description": "The complete list of decision boundaries for this AI system. Every autonomous decision the system makes must be represented.",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/decisionBoundary"
+      }
+    },
+    "specificationHistory": {
+      "type": "array",
+      "description": "Version history of this specification document.",
+      "items": {
+        "type": "object",
+        "required": ["version", "date", "author", "change"],
+        "properties": {
+          "version": { "type": "string" },
+          "date": { "type": "string", "format": "date" },
+          "author": { "type": "string" },
+          "change": { "type": "string" }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "decisionBoundary": {
+      "type": "object",
+      "title": "Decision Boundary",
+      "description": "A single decision boundary: the scope of autonomous AI action, who owns it, and what happens when it goes wrong.",
+      "required": [
+        "id",
+        "name",
+        "boundary",
+        "namedOwner",
+        "consequenceChain",
+        "deploymentClearance"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for this boundary within the specification.",
+          "pattern": "^BOUNDARY-\\d+$",
+          "examples": ["BOUNDARY-001"]
+        },
+        "name": {
+          "type": "string",
+          "description": "Short descriptive name for this decision boundary.",
+          "minLength": 1
+        },
+        "boundary": {
+          "type": "object",
+          "title": "Decision Boundary Definition",
+          "description": "Defines precisely what the AI system can do without human confirmation.",
+          "required": [
+            "triggerCondition",
+            "autonomousAction",
+            "authorityLimit",
+            "exclusionSet"
+          ],
+          "properties": {
+            "triggerCondition": {
+              "type": "string",
+              "description": "The observable state or input that causes the system to act autonomously. Must be specific enough to be detectable in logs.",
+              "minLength": 10
+            },
+            "autonomousAction": {
+              "type": "string",
+              "description": "What the system does when triggered, without human confirmation. Must be precise.",
+              "minLength": 10
+            },
+            "authorityLimit": {
+              "type": "string",
+              "description": "The hard upper bound of what the system may do. Actions beyond this limit require human confirmation.",
+              "minLength": 10
+            },
+            "exclusionSet": {
+              "type": "array",
+              "description": "Conditions under which the system must defer to a human even if the trigger condition is met.",
+              "minItems": 1,
+              "items": {
+                "type": "string",
+                "minLength": 5
+              }
+            }
+          }
+        },
+        "namedOwner": {
+          "type": "object",
+          "title": "Named Owner",
+          "description": "The specific human being accountable for outcomes produced by this decision boundary.",
+          "required": [
+            "fullName",
+            "role",
+            "contact",
+            "appointedBy",
+            "dateAppointed",
+            "acceptanceConfirmed"
+          ],
+          "properties": {
+            "fullName": {
+              "type": "string",
+              "description": "Legal name as it appears in organizational records.",
+              "minLength": 1
+            },
+            "role": {
+              "type": "string",
+              "description": "Current organizational role as it relates to this system.",
+              "minLength": 1
+            },
+            "contact": {
+              "type": "string",
+              "description": "Direct, current contact method. Not a team inbox.",
+              "minLength": 1
+            },
+            "appointedBy": {
+              "type": "object",
+              "description": "The person who formally designated this Named Owner.",
+              "required": ["fullName", "role"],
+              "properties": {
+                "fullName": { "type": "string", "minLength": 1 },
+                "role": { "type": "string", "minLength": 1 }
+              }
+            },
+            "dateAppointed": {
+              "type": "string",
+              "format": "date",
+              "description": "Date the Named Owner designation was made. ISO 8601 format."
+            },
+            "acceptanceConfirmed": {
+              "type": "boolean",
+              "description": "Named Owner has been notified and has confirmed acceptance in writing. Must be true for clearance.",
+              "const": true
+            }
+          }
+        },
+        "consequenceChain": {
+          "type": "object",
+          "title": "Consequence Chain",
+          "description": "What happens, in sequence, when this decision boundary is crossed incorrectly. Written before deployment.",
+          "required": [
+            "immediateSystemResponse",
+            "namedOwnerNotification",
+            "notificationRecipients",
+            "escalationPath",
+            "resolutionAuthority",
+            "reviewTrigger",
+            "testRecord"
+          ],
+          "properties": {
+            "immediateSystemResponse": {
+              "type": "string",
+              "description": "What the system does automatically when a boundary violation is detected. Must be a defined, testable behavior.",
+              "minLength": 10
+            },
+            "namedOwnerNotification": {
+              "type": "object",
+              "required": ["method", "timeBoundMinutes"],
+              "properties": {
+                "method": {
+                  "type": "string",
+                  "description": "How the Named Owner is notified (e.g., PagerDuty, SMS, email)."
+                },
+                "timeBoundMinutes": {
+                  "type": "integer",
+                  "description": "Maximum minutes before Named Owner must be notified.",
+                  "minimum": 1
+                }
+              }
+            },
+            "notificationRecipients": {
+              "type": "array",
+              "description": "Additional parties notified on a boundary violation, with their trigger conditions.",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": ["party", "triggerCondition", "method", "timeBoundMinutes"],
+                "properties": {
+                  "party": { "type": "string" },
+                  "triggerCondition": { "type": "string" },
+                  "method": { "type": "string" },
+                  "timeBoundMinutes": { "type": "integer", "minimum": 1 }
+                }
+              }
+            },
+            "escalationPath": {
+              "type": "array",
+              "description": "Ordered escalation steps if Named Owner does not respond.",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": ["step", "triggerAfterMinutes", "escalateTo", "method"],
+                "properties": {
+                  "step": { "type": "integer", "minimum": 1 },
+                  "triggerAfterMinutes": {
+                    "type": "integer",
+                    "description": "Minutes after Named Owner notification before this escalation step fires.",
+                    "minimum": 1
+                  },
+                  "escalateTo": {
+                    "type": "object",
+                    "required": ["fullName", "role"],
+                    "properties": {
+                      "fullName": { "type": "string" },
+                      "role": { "type": "string" }
+                    }
+                  },
+                  "method": { "type": "string" }
+                }
+              }
+            },
+            "resolutionAuthority": {
+              "type": "object",
+              "description": "The specific person who can declare the incident resolved and authorize boundary modifications.",
+              "required": ["fullName", "role"],
+              "properties": {
+                "fullName": { "type": "string", "minLength": 1 },
+                "role": { "type": "string", "minLength": 1 }
+              }
+            },
+            "reviewTrigger": {
+              "type": "string",
+              "description": "Conditions under which a boundary violation triggers a formal review of the decision boundary itself.",
+              "minLength": 10
+            },
+            "testRecord": {
+              "type": "object",
+              "required": ["tested"],
+              "properties": {
+                "tested": {
+                  "type": "boolean",
+                  "description": "Whether the consequence chain has been tested before deployment clearance."
+                },
+                "method": {
+                  "type": "string",
+                  "enum": ["tabletop-exercise", "staging-simulation", "structured-walkthrough"]
+                },
+                "date": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "participants": {
+                  "type": "array",
+                  "items": { "type": "string" }
+                },
+                "outcome": {
+                  "type": "string",
+                  "enum": ["pass", "fail", "gaps-identified"]
+                },
+                "outcomeNotes": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "deploymentClearance": {
+          "type": "object",
+          "title": "Deployment Clearance",
+          "description": "The binary gate. All checklist items must be true for CLEARED status.",
+          "required": [
+            "boundaryComplete",
+            "namedOwnerConfirmed",
+            "consequenceChainReviewed",
+            "consequenceChainTested",
+            "clearedBy",
+            "dateClearred",
+            "status"
+          ],
+          "properties": {
+            "boundaryComplete": {
+              "type": "boolean",
+              "description": "Decision boundary is complete: trigger condition, autonomous action, authority limit, and exclusion set all specified."
+            },
+            "namedOwnerConfirmed": {
+              "type": "boolean",
+              "description": "Named owner has been confirmed and has accepted designation in writing."
+            },
+            "consequenceChainReviewed": {
+              "type": "boolean",
+              "description": "Consequence chain has been reviewed and is complete."
+            },
+            "consequenceChainTested": {
+              "type": "boolean",
+              "description": "Consequence chain has been tested."
+            },
+            "clearedBy": {
+              "type": "object",
+              "description": "The Clearance Authority. Must not be the Named Owner, Specification Owner, or primary system developer.",
+              "required": ["fullName", "role"],
+              "properties": {
+                "fullName": { "type": "string", "minLength": 1 },
+                "role": { "type": "string", "minLength": 1 }
+              }
+            },
+            "dateClearred": {
+              "type": "string",
+              "format": "date",
+              "description": "Date clearance was granted or denied."
+            },
+            "status": {
+              "type": "string",
+              "enum": ["CLEARED", "NOT_CLEARED"],
+              "description": "Binary clearance status. CLEARED requires all checklist items to be true."
+            },
+            "notClearedReason": {
+              "type": "string",
+              "description": "If NOT_CLEARED: specific fields that are incomplete and the owner responsible for completing each."
+            }
+          }
+        }
+      }
+    }
+  }
+}
