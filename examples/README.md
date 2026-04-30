@@ -6,6 +6,7 @@ Filled specifications demonstrating the standard across deployment contexts.
 |---|---|---|---|
 | [Automated Loan Decision System](enterprise-ai-deployment.md) | Financial Services | 2 | Medium |
 | [Clinical Triage AI](clinical-triage-ai.md) | Healthcare | 2 | Medium-High |
+| [Manufacturing Production Scheduling AI](manufacturing-ops-ai.md) | Manufacturing / Operations | 2 | Medium |
 
 ## Contributing an Example
 
